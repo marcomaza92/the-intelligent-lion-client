@@ -15,7 +15,6 @@ const getTodos = async () => {
 
 const Todos = async () => {
   const data = await getTodos();
-  console.log(data);
 
   return (
     <section>

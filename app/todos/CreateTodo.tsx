@@ -6,18 +6,18 @@ const CreateTodo = () => {
       'use server'
       const rawData = {
         task: formData.get('task'),
-        is_complete: formData.get('is_complete') === 'on' ? true : false
+        // TODO: review null value when prop does not exist
+        is_complete: formData.get('is_complete') === null ? false : formData.get('is_complete') === 'on' ? true : false
       }
-      console.log(rawData);
-      const res = await fetch(`http://127.0.0.1:5000/create?task=${rawData.task}&is_complete=${rawData.is_complete}`, {
+      const res = await fetch(`http://127.0.0.1:5000/create`, {
         method: 'POST',
+        body: formData
       });
-      console.log(res.json());
     }
   
     return (
       <div className={styles.formContainer}>
-        <form className={styles.form} action={createTodo}>
+        <form className={styles.form} action={createTodo} >
           <label htmlFor="task">
             <span>Task</span>
             <input name="task" type="text" />
